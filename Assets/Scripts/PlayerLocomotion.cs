@@ -14,15 +14,15 @@ namespace HSW
         private Transform _cameraObject;
         private InputHandler _inputHandler;
 
-        private Vector3 moveDirection;
+        private Vector3 _moveDirection;
 
         [HideInInspector]
-        public Transform MyTransform;
+        public Transform myTransform;
         [HideInInspector]
-        public AnimatorHandler AnimatorHandler;
+        public AnimatorHandler animatorHandler;
 
-        public new Rigidbody Rigid;
-        public GameObject NormalCamera;
+        public new Rigidbody rigid;
+        public GameObject normalCamera;
 
         [Header("Stats")]
         [SerializeField] float movementSpeed = 5;
@@ -30,12 +30,12 @@ namespace HSW
 
         private void Start()
         {
-            Rigid = GetComponent<Rigidbody>();
+            rigid = GetComponent<Rigidbody>();
             _inputHandler = GetComponent<InputHandler>();
-            AnimatorHandler = GetComponentInChildren<AnimatorHandler>();
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
             _cameraObject = Camera.main.transform;
-            MyTransform = transform;
-            AnimatorHandler.Initialize();
+            myTransform = transform;
+            animatorHandler.Initialize();
         }
 
         private void Update()
@@ -44,20 +44,23 @@ namespace HSW
 
             _inputHandler.TickInput(delta);
 
-            moveDirection = _cameraObject.forward * _inputHandler.vertical;
-            moveDirection += _cameraObject.right * _inputHandler.horizontal;
-            moveDirection.Normalize();
+            _moveDirection = _cameraObject.forward * _inputHandler.vertical;
+            _moveDirection += _cameraObject.right * _inputHandler.horizontal;
+            _moveDirection.Normalize();
+
+            // 이동하다 플레이어가 공중에 뜨는 현상 fix
+            _moveDirection.y = 0;
 
             float speed = movementSpeed;
-            moveDirection *= speed;
+            _moveDirection *= speed;
 
             // TODO : Vector3.ProjectOnPlane 무엇인지 알아보기
-            Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
-            Rigid.velocity = projectedVelocity;
+            Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, normalVector);
+            rigid.velocity = projectedVelocity;
 
-            AnimatorHandler.UpdateAnimatorValue(_inputHandler.moveAmount, 0);
+            animatorHandler.UpdateAnimatorValue(_inputHandler.moveAmount, 0);
 
-            if (AnimatorHandler.IsRotate)
+            if (animatorHandler.isRotate)
             {
                 HandleRotation(delta);
             }
@@ -82,14 +85,14 @@ namespace HSW
 
             if (targetDir == Vector3.zero)
             {
-                targetDir = MyTransform.forward;
+                targetDir = myTransform.forward;
             }
 
             float rotSpeed = rotationSpeed;
             Quaternion tr = Quaternion.LookRotation(targetDir);
-            Quaternion targetRotation = Quaternion.Slerp(MyTransform.rotation, tr, rotSpeed * delta);
+            Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rotSpeed * delta);
 
-            MyTransform.rotation = targetRotation;
+            myTransform.rotation = targetRotation;
         }
 
         #endregion
