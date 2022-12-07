@@ -530,7 +530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 355623106}
   - component: {fileID: 355623105}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Camera Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -557,6 +557,9 @@ MonoBehaviour:
   pivotSpeed: 0.03
   maximumPivot: 35
   minimumPivot: -35
+  cameraSphereRadius: 0.2
+  cameraCollisionOffset: 0.2
+  minimumCollisionOffset: 0.2
 --- !u!4 &355623106
 Transform:
   m_ObjectHideFlags: 0
@@ -2601,7 +2604,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1940090639}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Camera Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
