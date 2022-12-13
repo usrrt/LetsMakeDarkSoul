@@ -26,6 +26,7 @@ namespace HSW
         {
             _inputHandler.isInteracting = _anim.GetBool("isInteracting");
             _inputHandler.rollFlag = false;
+            _inputHandler.sprintFlag = false;
         }
     }
 

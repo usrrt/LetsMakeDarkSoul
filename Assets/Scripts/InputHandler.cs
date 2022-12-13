@@ -18,7 +18,11 @@ namespace HSW
         public float mouseY;
 
         public bool b_Input;
+
         public bool rollFlag;
+        public bool sprintFlag;
+        public float rollInputTimer;
+        
         public bool isInteracting;
 
         PlayerControls _inputActions;
@@ -94,11 +98,26 @@ namespace HSW
              */
 
             // triggered를 사용하여 bool값으로 할당
-            b_Input = _inputActions.PlayerActions.Roll.triggered;
+            //b_Input = _inputActions.PlayerActions.Roll.triggered;
+            // sprint기능을 쓰기위해 phase사용
+            b_Input = _inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Performed;
 
             if (b_Input)
             {
-                rollFlag = true;
+                // 누르고 있으면 sprint
+                rollInputTimer += delta;
+                sprintFlag = true;
+            }
+            else
+            {
+                // 잠시 눌렀다 떼면 roll
+                if (rollInputTimer > 0 && rollInputTimer < 0.5f)
+                {
+                    sprintFlag = false;
+                    rollFlag = true;
+                }
+
+                rollInputTimer = 0;
             }
         }
     }

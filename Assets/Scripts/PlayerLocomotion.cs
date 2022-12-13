@@ -26,7 +26,10 @@ namespace HSW
 
         [Header("Stats")]
         [SerializeField] float movementSpeed = 5;
+        [SerializeField] float sprintSpeed = 7;
         [SerializeField] float rotationSpeed = 10;
+
+        public bool isSprinting;
 
         private void Start()
         {
@@ -42,6 +45,7 @@ namespace HSW
         {
             float delta = Time.deltaTime;
 
+            isSprinting = _inputHandler.b_Input;
             _inputHandler.TickInput(delta);
             HandleMovement(delta);
             HandleRollingAndSprinting(delta);
@@ -77,6 +81,11 @@ namespace HSW
 
         public void HandleMovement(float delta)
         {
+            if (_inputHandler.rollFlag)
+            {
+                return;
+            }
+
             _moveDirection = _cameraObject.forward * _inputHandler.vertical;
             _moveDirection += _cameraObject.right * _inputHandler.horizontal;
             _moveDirection.Normalize();
@@ -85,13 +94,22 @@ namespace HSW
             _moveDirection.y = 0;
 
             float speed = movementSpeed;
-            _moveDirection *= speed;
+            if (_inputHandler.sprintFlag)
+            {
+                speed = sprintSpeed;
+                isSprinting = true;
+                _moveDirection *= speed;
+            }
+            else
+            {
+                _moveDirection *= speed;
+            }
 
             // TODO : Vector3.ProjectOnPlane 무엇인지 알아보기
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, normalVector);
             rigid.velocity = projectedVelocity;
 
-            animatorHandler.UpdateAnimatorValue(_inputHandler.moveAmount, 0);
+            animatorHandler.UpdateAnimatorValue(_inputHandler.moveAmount, 0, isSprinting);
 
             if (animatorHandler.isRotate)
             {
