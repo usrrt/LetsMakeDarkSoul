@@ -43,28 +43,8 @@ namespace HSW
             float delta = Time.deltaTime;
 
             _inputHandler.TickInput(delta);
-
-            _moveDirection = _cameraObject.forward * _inputHandler.vertical;
-            _moveDirection += _cameraObject.right * _inputHandler.horizontal;
-            _moveDirection.Normalize();
-
-            // 이동하다 플레이어가 공중에 뜨는 현상 fix
-            _moveDirection.y = 0;
-
-            float speed = movementSpeed;
-            _moveDirection *= speed;
-
-            // TODO : Vector3.ProjectOnPlane 무엇인지 알아보기
-            Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, normalVector);
-            rigid.velocity = projectedVelocity;
-
-            animatorHandler.UpdateAnimatorValue(_inputHandler.moveAmount, 0);
-
-            if (animatorHandler.isRotate)
-            {
-                HandleRotation(delta);
-            }
-
+            HandleMovement(delta);
+            HandleRollingAndSprinting(delta);
         }
 
         #region Movement
@@ -93,6 +73,56 @@ namespace HSW
             Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rotSpeed * delta);
 
             myTransform.rotation = targetRotation;
+        }
+
+        public void HandleMovement(float delta)
+        {
+            _moveDirection = _cameraObject.forward * _inputHandler.vertical;
+            _moveDirection += _cameraObject.right * _inputHandler.horizontal;
+            _moveDirection.Normalize();
+
+            // 이동하다 플레이어가 공중에 뜨는 현상 fix
+            _moveDirection.y = 0;
+
+            float speed = movementSpeed;
+            _moveDirection *= speed;
+
+            // TODO : Vector3.ProjectOnPlane 무엇인지 알아보기
+            Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, normalVector);
+            rigid.velocity = projectedVelocity;
+
+            animatorHandler.UpdateAnimatorValue(_inputHandler.moveAmount, 0);
+
+            if (animatorHandler.isRotate)
+            {
+                HandleRotation(delta);
+            }
+        }
+
+        public void HandleRollingAndSprinting(float delta)
+        {
+            if (animatorHandler.anim.GetBool("isInteracting"))
+            {
+                return;
+            }
+
+            if (_inputHandler.rollFlag)
+            {
+                _moveDirection = _cameraObject.forward * _inputHandler.vertical;
+                _moveDirection += _cameraObject.right * _inputHandler.horizontal;
+
+                if (_inputHandler.moveAmount > 0)
+                {
+                    animatorHandler.PlayTargetAnimation("Rolling", true);
+                    _moveDirection.y = 0;
+                    Quaternion rollRotation = Quaternion.LookRotation(_moveDirection);
+                    myTransform.rotation = rollRotation;
+                }
+                else
+                {
+                    animatorHandler.PlayTargetAnimation("Backstep", true);
+                }
+            }
         }
 
         #endregion

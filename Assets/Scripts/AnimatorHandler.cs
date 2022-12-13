@@ -12,6 +12,8 @@ namespace HSW
         // ###############################################
 
         public Animator anim;
+        public InputHandler inputHandler;
+        public PlayerLocomotion playerLocomotion;
 
         private int vertical;
         private int horizontal;
@@ -22,7 +24,8 @@ namespace HSW
         public void Initialize()
         {
             anim = GetComponent<Animator>();
-
+            inputHandler = GetComponentInParent<InputHandler>();
+            playerLocomotion = GetComponentInParent<PlayerLocomotion>();
             // StringToHash : Animator Contorller의 파라미터에 접근할수있게 도와주는 Animator클래스 멤버. 파라미터를 생성할수있다(Generates an parameter id from a string)
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
@@ -74,6 +77,13 @@ namespace HSW
             anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
         }
 
+        public void PlayTargetAnimation(string targetAnim, bool isInteracting)
+        {
+            anim.applyRootMotion = isInteracting;
+            anim.SetBool("isInteracting", isInteracting);
+            anim.CrossFade(targetAnim, 0.2f);
+        }
+
         public void CanRotate()
         {
             isRotate = true;
@@ -82,6 +92,25 @@ namespace HSW
         public void StopRotation()
         {
             isRotate = false;
+        }
+
+        private void OnAnimatorMove()
+        {
+            //if (inputHandler.isInteracting == false)
+            //{
+            //    return;
+            //}
+            if (anim.GetBool("isInteracting") == false)
+            {
+                return;
+            }
+
+            float delta = Time.deltaTime;
+            playerLocomotion.rigid.drag = 0;
+            Vector3 deltaPosition = anim.deltaPosition;
+            deltaPosition.y = 0;
+            Vector3 velocity = deltaPosition / delta;
+            playerLocomotion.rigid.velocity = velocity;
         }
     }
 
