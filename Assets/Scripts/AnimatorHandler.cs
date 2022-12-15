@@ -11,9 +11,11 @@ namespace HSW
         //             MAIL : gkenfktm@gmail.com         
         // ###############################################
 
+        PlayerManager _playerManager;
+        InputHandler _inputHandler;
+        PlayerLocomotion _playerLocomotion;
+
         public Animator anim;
-        public InputHandler inputHandler;
-        public PlayerLocomotion playerLocomotion;
 
         private int vertical;
         private int horizontal;
@@ -23,9 +25,10 @@ namespace HSW
         // 클래스를 다른곳에서 참조할대 사용하기전 초기화가 필요한것들은 한 메소드에 넣어두고 사용하는곳 start에서 초기화해주는것이 가장 기본적인 형태로 많이 쓰인다
         public void Initialize()
         {
+            _playerManager = GetComponentInParent<PlayerManager>();
+            _inputHandler = GetComponentInParent<InputHandler>();
+            _playerLocomotion = GetComponentInParent<PlayerLocomotion>();
             anim = GetComponent<Animator>();
-            inputHandler = GetComponentInParent<InputHandler>();
-            playerLocomotion = GetComponentInParent<PlayerLocomotion>();
             // StringToHash : Animator Contorller의 파라미터에 접근할수있게 도와주는 Animator클래스 멤버. 파라미터를 생성할수있다(Generates an parameter id from a string)
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
@@ -102,21 +105,17 @@ namespace HSW
 
         private void OnAnimatorMove()
         {
-            //if (inputHandler.isInteracting == false)
-            //{
-            //    return;
-            //}
-            if (anim.GetBool("isInteracting") == false)
+            if (_playerManager.isInteracting == false)
             {
                 return;
             }
 
             float delta = Time.deltaTime;
-            playerLocomotion.rigid.drag = 0;
+            _playerLocomotion.rigid.drag = 0;
             Vector3 deltaPosition = anim.deltaPosition;
             deltaPosition.y = 0;
             Vector3 velocity = deltaPosition / delta;
-            playerLocomotion.rigid.velocity = velocity;
+            _playerLocomotion.rigid.velocity = velocity;
         }
     }
 
