@@ -25,10 +25,18 @@ namespace HSW
         public new Rigidbody rigid;
         public GameObject normalCamera;
 
+        [Header("Grond & Air Detection Stats")]
+        [SerializeField] float groundDetectionRayStartPoint = 0.5f;
+        [SerializeField] float minimumDistanceNeededToBeginFall = 1f;
+        [SerializeField] float groundDirectionRayDistance = 0.2f;
+        public float inAirTimer;
+        LayerMask _ignoreForGroundCheck;
+
         [Header("Movement Stats")]
         [SerializeField] float movementSpeed = 5;
         [SerializeField] float sprintSpeed = 7;
         [SerializeField] float rotationSpeed = 10;
+        [SerializeField] float fallingSpeed = 45;
 
 
 
@@ -41,6 +49,9 @@ namespace HSW
             _cameraObject = Camera.main.transform;
             myTransform = transform;
             animatorHandler.Initialize();
+
+            _playerManager.isGrounded = true;
+            _ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
         }
 
         #region Movement
@@ -133,6 +144,11 @@ namespace HSW
                     animatorHandler.PlayTargetAnimation("Backstep", true);
                 }
             }
+        }
+
+        public void HandleFalling(float delta, Vector3 moveDirection)
+        {
+
         }
 
         #endregion

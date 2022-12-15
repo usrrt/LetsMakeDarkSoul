@@ -22,9 +22,12 @@ namespace HSW
         CameraHandler _cameraHandler;
         PlayerLocomotion _locomotion;
 
-        [Header("Player Flags")]
         public bool isInteracting;
+
+        [Header("Player Flags")]
         public bool isSprinting;
+        public bool isInAir;
+        public bool isGrounded;
 
         private void Awake()
         {
