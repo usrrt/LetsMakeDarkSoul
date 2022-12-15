@@ -22,30 +22,11 @@ namespace HSW
         public bool rollFlag;
         public bool sprintFlag;
         public float rollInputTimer;
-        
-        public bool isInteracting;
 
         PlayerControls _inputActions;
-        CameraHandler _cameraHandler;
 
         Vector2 _movemetInput;
         Vector2 _cameraInput;
-
-        private void Awake()
-        {
-            _cameraHandler = CameraHandler.singleton;
-        }
-
-        private void FixedUpdate() // 이번에도 카메라 관련 움직임은 FixedUpdate에서 처리함
-        {
-            float delta = Time.deltaTime;
-
-            if (_cameraHandler  != null)
-            {
-                _cameraHandler.FollowTarget(delta);
-                _cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
-            }
-        }
 
         private void OnEnable()
         {

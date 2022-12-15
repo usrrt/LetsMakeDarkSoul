@@ -11,10 +11,11 @@ namespace HSW
         //             MAIL : gkenfktm@gmail.com         
         // ###############################################
 
-        private Transform _cameraObject;
-        private InputHandler _inputHandler;
+        Transform _cameraObject;
+        InputHandler _inputHandler;
+        PlayerManager _playerManager;
 
-        private Vector3 _moveDirection;
+        Vector3 _moveDirection;
 
         [HideInInspector]
         public Transform myTransform;
@@ -24,31 +25,22 @@ namespace HSW
         public new Rigidbody rigid;
         public GameObject normalCamera;
 
-        [Header("Stats")]
+        [Header("Movement Stats")]
         [SerializeField] float movementSpeed = 5;
         [SerializeField] float sprintSpeed = 7;
         [SerializeField] float rotationSpeed = 10;
 
-        public bool isSprinting;
+
 
         private void Start()
         {
             rigid = GetComponent<Rigidbody>();
+            _playerManager = GetComponent<PlayerManager>();
             _inputHandler = GetComponent<InputHandler>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
             _cameraObject = Camera.main.transform;
             myTransform = transform;
             animatorHandler.Initialize();
-        }
-
-        private void Update()
-        {
-            float delta = Time.deltaTime;
-
-            isSprinting = _inputHandler.b_Input;
-            _inputHandler.TickInput(delta);
-            HandleMovement(delta);
-            HandleRollingAndSprinting(delta);
         }
 
         #region Movement
@@ -97,7 +89,7 @@ namespace HSW
             if (_inputHandler.sprintFlag)
             {
                 speed = sprintSpeed;
-                isSprinting = true;
+                _playerManager.isSprinting = true;
                 _moveDirection *= speed;
             }
             else
@@ -109,7 +101,7 @@ namespace HSW
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, normalVector);
             rigid.velocity = projectedVelocity;
 
-            animatorHandler.UpdateAnimatorValue(_inputHandler.moveAmount, 0, isSprinting);
+            animatorHandler.UpdateAnimatorValue(_inputHandler.moveAmount, 0, _playerManager.isSprinting);
 
             if (animatorHandler.isRotate)
             {
