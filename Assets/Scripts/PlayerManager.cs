@@ -22,9 +22,12 @@ namespace HSW
         CameraHandler _cameraHandler;
         PlayerLocomotion _locomotion;
 
-        [Header("Player Flags")]
         public bool isInteracting;
+
+        [Header("Player Flags")]
         public bool isSprinting;
+        public bool isInAir;
+        public bool isGrounded;
 
         private void Awake()
         {
@@ -59,6 +62,7 @@ namespace HSW
             _inputHandler.TickInput(delta);
             _locomotion.HandleMovement(delta);
             _locomotion.HandleRollingAndSprinting(delta);
+            _locomotion.HandleFalling(delta, _locomotion.moveDirection);
         }
 
         private void LateUpdate()
@@ -66,6 +70,11 @@ namespace HSW
             _inputHandler.rollFlag = false;
             _inputHandler.sprintFlag = false;
             isSprinting = _inputHandler.b_Input;
+
+            if (isInAir)
+            {
+                _locomotion.inAirTimer = _locomotion.inAirTimer + Time.deltaTime;
+            }
         }
     }
 

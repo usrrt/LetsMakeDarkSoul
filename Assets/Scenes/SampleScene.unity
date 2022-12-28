@@ -1484,7 +1484,8 @@ MonoBehaviour:
   mouseY: 0
   b_Input: 0
   rollFlag: 0
-  isInteracting: 0
+  sprintFlag: 0
+  rollInputTimer: 0
 --- !u!54 &948465459
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1512,9 +1513,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
-  m_Height: 2
+  m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &948465461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1531,8 +1532,14 @@ MonoBehaviour:
   animatorHandler: {fileID: 0}
   rigid: {fileID: 0}
   normalCamera: {fileID: 0}
+  groundDetectionRayStartPoint: 0.5
+  minimumDistanceNeededToBeginFall: 1
+  groundDirectionRayDistance: 0.2
+  inAirTimer: 0
   movementSpeed: 5
+  sprintSpeed: 7
   rotationSpeed: 10
+  fallingSpeed: 45
 --- !u!114 &948465462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,6 +1552,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61161004d5c6b5741b0dfce01ae9bacc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInteracting: 0
+  isSprinting: 0
+  isInAir: 0
+  isGrounded: 0
 --- !u!1 &952506987
 GameObject:
   m_ObjectHideFlags: 0
@@ -4995,8 +5006,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  inputHandler: {fileID: 0}
-  playerLocomotion: {fileID: 0}
   isRotate: 1
 --- !u!4 &102363899115063745
 Transform:
