@@ -62,8 +62,8 @@ namespace HSW
 
         private void HandleRollInput(float delta)
         {
+            // TODO : inputAction관련 이슈 및 해결법
             /*
-             * 이슈 발생
              * _inputActions.PlayerActions.Roll.phase값이 performed만 들어왔음
              * 그래서_inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started는 작동하지 않았음
              * phase는 맨처음 Started가 들어온다고 했는데 왜인지 Started는 찍히지 않았음
@@ -83,6 +83,7 @@ namespace HSW
             // sprint기능을 쓰기위해 phase사용
             b_Input = _inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Performed;
 
+            // TODO : 쉬프트를 누르면 달리기 애니메이션이 실행됨. 앞으로 가지 않는데도!
             if (b_Input)
             {
                 // 누르고 있으면 sprint
