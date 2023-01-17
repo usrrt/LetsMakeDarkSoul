@@ -98,14 +98,17 @@ namespace HSW
             moveDirection.y = 0;
 
             float speed = movementSpeed;
-            if (_inputHandler.sprintFlag)
+            if (_inputHandler.sprintFlag && (moveDirection.x != 0))
             {
+                Debug.Log("sprinting");
                 speed = sprintSpeed;
                 _playerManager.isSprinting = true;
                 moveDirection *= speed;
             }
             else
             {
+                _playerManager.isSprinting = false;
+
                 moveDirection *= speed;
             }
 

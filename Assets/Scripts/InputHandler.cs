@@ -63,6 +63,7 @@ namespace HSW
         private void HandleRollInput(float delta)
         {
             // TODO : inputAction관련 이슈 및 해결법
+            #region 이슈
             /*
              * _inputActions.PlayerActions.Roll.phase값이 performed만 들어왔음
              * 그래서_inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started는 작동하지 않았음
@@ -78,12 +79,30 @@ namespace HSW
              * 세번째로는 performed를 변수로 받는것이다
              */
 
+            #endregion
+
             // triggered를 사용하여 bool값으로 할당
             //b_Input = _inputActions.PlayerActions.Roll.triggered;
             // sprint기능을 쓰기위해 phase사용
             b_Input = _inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Performed;
 
             // TODO : 쉬프트를 누르면 달리기 애니메이션이 실행됨. 앞으로 가지 않는데도!
+            #region 이슈
+            /*
+             *** 내가 생각한 해결법 ***
+            앞으로 나가지 않으면 즉, moveDirection이 0일경우엔 달리는 모션안나오면 된다
+            PlayerLocomotion엔 animatorHandler.UpdateAnimatorValue메서드를 호출한는데 여기서 bool값으로 isSprinting을 사용한다. 
+            이 메서드는 캐릭터 움직임 blend tree 값을 바꿔주는데 만약 isSprinting이 true면 2로 고정되며 캐릭터가 달리는 모션을 취하게 된다.
+            즉, isSprinting이 true 상태면 캐릭터가 달리는 모션이 나오게 된다.
+            그러므로 원하는 구현을 위해선 쉬프트를 누르면서 movedirection.x값이 0이 아닐경우(방향키를 누를경우) isSprinting을 true로 바꿔주면 된다
+            나는 playerManager의 LateUpdate에 있는 isSprinting = _inputHandler.b_Input를 주석처리하고
+            PlayerLocomotion HandleMovement메서드안 sprintFlag조건문을 수정하였다
+            쉬프트와 방향키를 동시에 눌러야하는 조건(_inputHandler.sprintFlag && (moveDirection.x != 0))일 경우 isSprinting은 true가 되고
+            그렇지 않은경우엔 false로 바꿔줬다
+             */
+
+            #endregion
+
             if (b_Input)
             {
                 // 누르고 있으면 sprint
