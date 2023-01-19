@@ -69,7 +69,8 @@ namespace HSW
         {
             _inputHandler.rollFlag = false;
             _inputHandler.sprintFlag = false;
-            //isSprinting = _inputHandler.b_Input;
+            _inputHandler.rb_Input = false;
+            _inputHandler.rt_Input = false;
 
             if (isInAir)
             {

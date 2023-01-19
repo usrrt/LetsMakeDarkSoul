@@ -18,15 +18,25 @@ namespace HSW
         public float mouseY;
 
         public bool b_Input;
+        public bool rb_Input;
+        public bool rt_Input;
 
         public bool rollFlag;
         public bool sprintFlag;
         public float rollInputTimer;
 
         PlayerControls _inputActions;
+        PlayerAttacker _playerAttacker;
+        PlayerInventory _playerInventory;
 
         Vector2 _movemetInput;
         Vector2 _cameraInput;
+
+        private void Awake()
+        {
+            _playerAttacker = GetComponent<PlayerAttacker>();
+            _playerInventory = GetComponent<PlayerInventory>();
+        }
 
         private void OnEnable()
         {
@@ -47,11 +57,12 @@ namespace HSW
 
         public void TickInput(float delta)
         {
-            MoveInput(delta); // 이런식으로 보호수준을 지켜서 사용하는구만! 상당히 캡슐적이야
+            HandleMoveInput(delta); // 이런식으로 보호수준을 지켜서 사용하는구만! 상당히 캡슐적이야
             HandleRollInput(delta);
+            HandleAttackInput(delta);
         }
 
-        private void MoveInput(float delta)
+        private void HandleMoveInput(float delta)
         {
             horizontal = _movemetInput.x;
             vertical = _movemetInput.y;
@@ -99,6 +110,13 @@ namespace HSW
             PlayerLocomotion HandleMovement메서드안 sprintFlag조건문을 수정하였다
             쉬프트와 방향키를 동시에 눌러야하는 조건(_inputHandler.sprintFlag && (moveDirection.x != 0))일 경우 isSprinting은 true가 되고
             그렇지 않은경우엔 false로 바꿔줬다
+
+            *** 유튜버 해결법 ***
+            PlayerManager의 isSprinting = _inputHandler.b_Input;삭제 -> 항상 true를 반환하기 때문에
+            PlayerLocomotion의 달리기 조건문 추가 -> moveAmount값이 일정 수치 이상이라는 조건 추가함
+                추가로 else문에 walingSpeed, speed 조건문 추가
+
+            
              */
 
             #endregion
@@ -119,6 +137,22 @@ namespace HSW
                 }
 
                 rollInputTimer = 0;
+            }
+        }
+
+        private void HandleAttackInput(float delta)
+        {
+            _inputActions.PlayerActions.RB.performed += i => rb_Input = true;
+            _inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+
+            if (rb_Input)
+            {
+                _playerAttacker.HandleLightAttack(_playerInventory.rightWeapon);
+            }
+
+            if (rt_Input)
+            {
+                _playerAttacker.HandleHeavyAttack(_playerInventory.rightWeapon);
             }
         }
     }

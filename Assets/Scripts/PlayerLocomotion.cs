@@ -34,6 +34,7 @@ namespace HSW
 
         [Header("Movement Stats")]
         [SerializeField] float movementSpeed = 5;
+        [SerializeField] float walkingSpeed = 1;
         [SerializeField] float sprintSpeed = 7;
         [SerializeField] float rotationSpeed = 10;
         [SerializeField] float fallingSpeed = 45;
@@ -98,18 +99,27 @@ namespace HSW
             moveDirection.y = 0;
 
             float speed = movementSpeed;
-            if (_inputHandler.sprintFlag && (moveDirection.x != 0))
+            //if (_inputHandler.sprintFlag && (moveDirection.x != 0))
+            if (_inputHandler.sprintFlag && _inputHandler.moveAmount > 0.5)
             {
-                Debug.Log("sprinting");
                 speed = sprintSpeed;
                 _playerManager.isSprinting = true;
                 moveDirection *= speed;
             }
             else
             {
-                _playerManager.isSprinting = false;
+                //_playerManager.isSprinting = false;
+                if (_inputHandler.moveAmount < 0.5)
+                {
+                    moveDirection *= walkingSpeed;
+                    _playerManager.isSprinting = false;
+                }
+                else
+                {
+                    moveDirection *= speed;
+                    _playerManager.isSprinting = false;
+                }
 
-                moveDirection *= speed;
             }
 
             // TODO : Vector3.ProjectOnPlane 무엇인지 알아보기
@@ -187,13 +197,12 @@ namespace HSW
                 {
                     if (inAirTimer > 0.5f)
                     {
-                        Debug.Log("공중에 뜸 " + inAirTimer);
                         animatorHandler.PlayTargetAnimation("Land", true);
                         inAirTimer = 0;
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation("Locomotion", false);
+                        animatorHandler.PlayTargetAnimation("Empty", false);
                         inAirTimer = 0;
                     }
 
