@@ -234,13 +234,18 @@ namespace HSW
             {
                 if (_playerManager.isInteracting || _inputHandler.moveAmount > 0)
                 {
-                    myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime);
+                    // 공격시 캐릭터가 sink되는 문제 발생 => t 값에 0.1로 나눠줌
+                    myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime / 0.1f);
+
+                    // 왜 lerp를 사용했는지 모르겠음
+                    // sink문제는 myTransform.position = targetPosition 만 사용해도 해결되고, 문제없어보임
                 }
                 else
                 {
                     myTransform.position = targetPosition;
                 }
             }
+
         }
 
         #endregion
