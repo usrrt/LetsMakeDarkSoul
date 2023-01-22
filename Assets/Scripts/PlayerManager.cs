@@ -22,7 +22,9 @@ namespace HSW
         CameraHandler _cameraHandler;
         PlayerLocomotion _locomotion;
 
+        // GetBool로 상태를 가져온뒤 조건문으로 사용함
         public bool isInteracting;
+        public bool canDoCombo;
 
         [Header("Player Flags")]
         public bool isSprinting;
@@ -58,6 +60,7 @@ namespace HSW
             float delta = Time.deltaTime;
 
             isInteracting = _anim.GetBool("isInteracting");
+            canDoCombo = _anim.GetBool("canDoCombo");
 
             _inputHandler.TickInput(delta);
             _locomotion.HandleMovement(delta);

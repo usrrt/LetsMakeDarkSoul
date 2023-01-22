@@ -407,6 +407,20 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.4525915
+        functionName: EnableCombo
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 8381050721727e84aa558f1bbcc351b7, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9680082
+        functionName: DisableCombo
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 8381050721727e84aa558f1bbcc351b7, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -415,7 +429,7 @@ ModelImporter:
       name: Female Sword Attack 2
       takeName: Take 001
       internalID: 0
-      firstFrame: 40
+      firstFrame: 41
       lastFrame: 70
       wrapMode: 0
       orientationOffsetY: 0
@@ -435,7 +449,35 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.3368951
+        functionName: OpenRightDamageCollider
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 75e1396c504a4674ba376ad19b31e105, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.46473753
+        functionName: CloseRightDamageCollider
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 75e1396c504a4674ba376ad19b31e105, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.59183675
+        functionName: EnableCombo
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 8381050721727e84aa558f1bbcc351b7, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8573083
+        functionName: DisableCombo
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 8381050721727e84aa558f1bbcc351b7, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

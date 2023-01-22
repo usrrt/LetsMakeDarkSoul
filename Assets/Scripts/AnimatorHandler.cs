@@ -103,6 +103,22 @@ namespace HSW
             isRotate = false;
         }
 
+        /*
+         Enable, Disable나눈이유
+        애니메이션이벤트를 통해서 애니메이션 bool값을 바꿀려고
+        */
+        public void EnableCombo()
+        {
+            Debug.Log("combo!");
+            anim.SetBool("canDoCombo", true);
+        }
+
+        public void DisableCombo()
+        {
+            Debug.Log("combo end");
+            anim.SetBool("canDoCombo", false);
+        }
+
         private void OnAnimatorMove()
         {
             if (_playerManager.isInteracting == false)

@@ -23,11 +23,13 @@ namespace HSW
 
         public bool rollFlag;
         public bool sprintFlag;
+        public bool comboFlag;
         public float rollInputTimer;
 
         PlayerControls _inputActions;
         PlayerAttacker _playerAttacker;
         PlayerInventory _playerInventory;
+        PlayerManager _playerManager;
 
         Vector2 _movemetInput;
         Vector2 _cameraInput;
@@ -36,6 +38,7 @@ namespace HSW
         {
             _playerAttacker = GetComponent<PlayerAttacker>();
             _playerInventory = GetComponent<PlayerInventory>();
+            _playerManager = GetComponent<PlayerManager>();
         }
 
         private void OnEnable()
@@ -147,11 +150,38 @@ namespace HSW
 
             if (rb_Input)
             {
-                _playerAttacker.HandleLightAttack(_playerInventory.rightWeapon);
+                // 콤보상태일땐 콤보공격모션
+                if (_playerManager.canDoCombo)
+                {
+                    comboFlag = true;
+                    _playerAttacker.HandleWeaponCombo(_playerInventory.rightWeapon);
+                    comboFlag = false; // 여러번 호출되는것을 막기위해 사용즉시 false
+                }
+                else
+                {
+                    // 공격키를 누를때 여러번 입력되는것 방지
+                    if (_playerManager.isInteracting)
+                    {
+                        return;
+                    }
+                    if (_playerManager.canDoCombo)
+                    {
+                        return;
+                    }
+                    _playerAttacker.HandleLightAttack(_playerInventory.rightWeapon);
+                }
             }
 
             if (rt_Input)
             {
+                if (_playerManager.isInteracting)
+                {
+                    return;
+                }
+                if (_playerManager.canDoCombo)
+                {
+                    return;
+                }
                 _playerAttacker.HandleHeavyAttack(_playerInventory.rightWeapon);
             }
         }

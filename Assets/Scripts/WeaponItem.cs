@@ -17,6 +17,8 @@ namespace HSW
 
         [Header("One Handed Attack Animations")]
         public string OneHanded_Light_Attack_1;
+        public string OneHanded_Light_Attack_2;
         public string OneHanded_Heavy_Attack_1;
+        public string OneHanded_Heavy_Attack_2;
     }
 }
