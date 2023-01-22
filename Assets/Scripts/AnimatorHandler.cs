@@ -90,7 +90,7 @@ namespace HSW
         {
             anim.applyRootMotion = isInteracting;
             anim.SetBool("isInteracting", isInteracting);
-            anim.CrossFade(targetAnim, 0.2f);
+            anim.CrossFade(targetAnim, 0.2f); // 애니메이션을 부드럽게 연결
         }
 
         public void CanRotate()

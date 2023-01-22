@@ -20,3 +20,6 @@ MonoBehaviour:
   OneHanded_Light_Attack_2: OneHanded_Light_Attack_02
   OneHanded_Heavy_Attack_1: OneHanded_Heavy_Attack_01
   OneHanded_Heavy_Attack_2: 
+  Right_Hand_Idle_01: Right_Arm_Idle_01
+  Left_Hand_Idle_01: Left_Arm_Idle_01
+  Leg_Idle_01: Leg_Idle_01

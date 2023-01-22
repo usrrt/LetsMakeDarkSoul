@@ -33,6 +33,7 @@ namespace HSW
             _animatorHandler.PlayTargetAnimation(weapon.OneHanded_Heavy_Attack_1, true);
             lastAttack = weapon.OneHanded_Heavy_Attack_1;
         }
+
         public void HandleWeaponCombo(WeaponItem weapon)
         {
             // 프레임당 한번만 부르기위해 flag사용

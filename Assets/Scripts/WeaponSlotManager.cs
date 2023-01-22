@@ -17,8 +17,12 @@ namespace HSW
         DamageCollider _leftHandDamageCollider;
         DamageCollider _rightHandDamageCollider;
 
+        Animator _animator;
+
         private void Awake()
         {
+            _animator = GetComponent<Animator>();
+
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             // 오른손 weaponholerslot인지 왼손 weponhodlerslot인지 확인
             foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
@@ -40,11 +44,34 @@ namespace HSW
             {
                 _leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftWeaponDamageCollider();
+                #region Handle Left Weapon Idle Animations
+                // 안전하게 null체크 (근데 null이 들어오면 LoadLeftWeaponDamageCollider에서 오류가 발생 하지 않을까?)
+                if (weaponItem != null)
+                {
+                    _animator.CrossFade(weaponItem.Left_Hand_Idle_01, 0.2f);
+                }
+                else
+                {
+                    _animator.CrossFade("Left Arm Empty", 0.2f);
+                }
+                #endregion
             }
             else
             {
                 _rigthHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightWeaponDamageCollider();
+                #region Handle Right Weapon Idle Animations
+                if (weaponItem != null)
+                {
+                    _animator.CrossFade(weaponItem.Right_Hand_Idle_01, 0.2f);
+
+                }
+                else
+                {
+                    _animator.CrossFade("Right Arm Empty", 0.2f);
+
+                }
+                #endregion
             }
         }
 

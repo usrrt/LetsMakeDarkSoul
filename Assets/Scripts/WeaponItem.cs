@@ -20,5 +20,10 @@ namespace HSW
         public string OneHanded_Light_Attack_2;
         public string OneHanded_Heavy_Attack_1;
         public string OneHanded_Heavy_Attack_2;
+
+        // TODO : 팔이 어색해서 임시 보류(현재 layer weight 0)
+        [Header("Idle Animations")]
+        public string Right_Hand_Idle_01;
+        public string Left_Hand_Idle_01;
     }
 }
