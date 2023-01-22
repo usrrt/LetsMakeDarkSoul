@@ -20,6 +20,10 @@ namespace HSW
         public bool b_Input;
         public bool rb_Input;
         public bool rt_Input;
+        public bool d_Pad_Up;
+        public bool d_Pad_Down;
+        public bool d_Pad_Left;
+        public bool d_Pad_Right;
 
         public bool rollFlag;
         public bool sprintFlag;
@@ -63,6 +67,7 @@ namespace HSW
             HandleMoveInput(delta); // 이런식으로 보호수준을 지켜서 사용하는구만! 상당히 캡슐적이야
             HandleRollInput(delta);
             HandleAttackInput(delta);
+            HandleQuickSlotsInput();
         }
 
         private void HandleMoveInput(float delta)
@@ -183,6 +188,21 @@ namespace HSW
                     return;
                 }
                 _playerAttacker.HandleHeavyAttack(_playerInventory.rightWeapon);
+            }
+        }
+
+        private void HandleQuickSlotsInput()
+        {
+            _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+            _inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+
+            if (d_Pad_Right)
+            {
+                _playerInventory.ChangeRightWeapon();
+            }
+            else if (d_Pad_Left)
+            {
+                _playerInventory.ChangeLeftWeapon();
             }
         }
     }

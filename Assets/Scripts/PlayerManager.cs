@@ -70,10 +70,15 @@ namespace HSW
 
         private void LateUpdate()
         {
+            // update보다 느리게 실행되는 lateUpdate를 통해 flag나 입력키 상태를 false로 바꿔주면 여러번 입력되는것을 막을수있다
             _inputHandler.rollFlag = false;
             _inputHandler.sprintFlag = false;
             _inputHandler.rb_Input = false;
             _inputHandler.rt_Input = false;
+            _inputHandler.d_Pad_Up = false;
+            _inputHandler.d_Pad_Down = false;
+            _inputHandler.d_Pad_Right = false;
+            _inputHandler.d_Pad_Left = false;
 
             if (isInAir)
             {

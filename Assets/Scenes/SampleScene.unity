@@ -2193,6 +2193,7 @@ MonoBehaviour:
   rt_Input: 0
   rollFlag: 0
   sprintFlag: 0
+  comboFlag: 0
   rollInputTimer: 0
 --- !u!54 &948465459
 Rigidbody:
@@ -2263,6 +2264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInteracting: 0
+  canDoCombo: 0
   isSprinting: 0
   isInAir: 0
   isGrounded: 0
@@ -2280,6 +2282,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: 535d3d030f462034e8a848397ca7d2f7, type: 2}
   leftWeapon: {fileID: 11400000, guid: 535d3d030f462034e8a848397ca7d2f7, type: 2}
+  unarmedWeapon: {fileID: 11400000, guid: 05d14b1f8fbbb514ca668da3c4c3ad99, type: 2}
+  weaponsInRightHandSlots:
+  - {fileID: 0}
+  weaponsInLeftHandSlots:
+  - {fileID: 0}
+  currentRightWeaponIndex: 0
+  currentLeftWeaponIndex: 0
 --- !u!114 &948465464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2292,6 +2301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664261d3727f0cc4b93fe0214fd2514e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastAttack: 
 --- !u!114 &948465465
 MonoBehaviour:
   m_ObjectHideFlags: 0
