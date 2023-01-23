@@ -40,47 +40,71 @@ namespace HSW
             // 인덱스범위면서 슬롯이 null이 아닐때 무기를 load한다
             // 무기를 바꾸기위해선 weaponIndex로만 접근할수있다
 
-            currentRightWeaponIndex = currentRightWeaponIndex + 1;
+            //currentRightWeaponIndex = currentRightWeaponIndex + 1;
 
-            if (currentRightWeaponIndex > weaponsInRightHandSlots.Length - 1)
+            //if (currentRightWeaponIndex > weaponsInRightHandSlots.Length - 1)
+            //{
+            //    // -1인 이유 : 비무장상태에서 다시 메소드를 호출하면 제일 윗코드로 인해 ++되어 0이된다. 인덱스 0일때의 조건문이 실행됨
+            //    currentRightWeaponIndex = -1;
+            //    rightWeapon = unarmedWeapon;
+            //    _waponSlotManager.LoadWeaponOnSlot(unarmedWeapon, false);
+            //}
+            //else if (weaponsInRightHandSlots[currentRightWeaponIndex] != null)
+            //{
+            //    rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
+            //    _waponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
+            //}
+            //else
+            //{
+            //    currentRightWeaponIndex = currentRightWeaponIndex + 1;
+            //}
+
+            ++currentRightWeaponIndex;
+
+            if (currentRightWeaponIndex <= weaponsInRightHandSlots.Length - 1)
             {
-                // -1인 이유 : 비무장상태에서 다시 메소드를 호출하면 제일 윗코드로 인해 ++되어 0이된다. 인덱스 0일때의 조건문이 실행됨
-                currentRightWeaponIndex = -1;
-                rightWeapon = unarmedWeapon;
-                _waponSlotManager.LoadWeaponOnSlot(unarmedWeapon, false);
-            }
-            else if (weaponsInRightHandSlots[currentRightWeaponIndex] != null)
-            {
-                rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
-                _waponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
+                if (weaponsInRightHandSlots[currentRightWeaponIndex] != null)
+                {
+                    rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
+                }
+                else
+                {
+                    ++currentRightWeaponIndex;
+                    rightWeapon = unarmedWeapon;
+                }
             }
             else
             {
-                currentRightWeaponIndex = currentRightWeaponIndex + 1;
+                currentRightWeaponIndex = -1;
+                rightWeapon = unarmedWeapon;
             }
 
+            _waponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
         }
 
         public void ChangeLeftWeapon()
         {
-            currentLeftWeaponIndex = currentLeftWeaponIndex + 1;
+            ++currentLeftWeaponIndex;
 
-            if (currentLeftWeaponIndex > weaponsInLeftHandSlots.Length - 1)
+            if (currentLeftWeaponIndex <= weaponsInLeftHandSlots.Length - 1)
             {
-                // -1인 이유 : 비무장상태에서 다시 메소드를 호출하면 제일 윗코드로 인해 ++되어 0이된다. 인덱스 0일때의 조건문이 실행됨
-                currentLeftWeaponIndex = -1;
-                leftWeapon = unarmedWeapon;
-                _waponSlotManager.LoadWeaponOnSlot(unarmedWeapon, false);
-            }
-            else if (weaponsInLeftHandSlots[currentLeftWeaponIndex] != null)
-            {
-                leftWeapon = weaponsInLeftHandSlots[currentLeftWeaponIndex];
-                _waponSlotManager.LoadWeaponOnSlot(weaponsInLeftHandSlots[currentLeftWeaponIndex], false);
+                if (weaponsInLeftHandSlots[currentLeftWeaponIndex] != null)
+                {
+                    leftWeapon = weaponsInLeftHandSlots[currentLeftWeaponIndex];
+                }
+                else
+                {
+                    ++currentLeftWeaponIndex;
+                    leftWeapon = unarmedWeapon;
+                }
             }
             else
             {
-                currentLeftWeaponIndex = currentLeftWeaponIndex + 1;
+                currentLeftWeaponIndex = -1;
+                leftWeapon = unarmedWeapon;
             }
+
+            _waponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
         }
     }
 }
