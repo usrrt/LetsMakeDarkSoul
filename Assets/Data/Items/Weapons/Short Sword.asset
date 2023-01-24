@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47929e1012ec3574ebc3b6a2567aad40, type: 3}
-  m_Name: Shot Sword
+  m_Name: Short Sword
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
-  itemName: Sword_1
-  modelPrefab: {fileID: 2129766748542358826, guid: 6d7ce56f51bd2794ba124a923632be59, type: 3}
+  itemIcon: {fileID: 21300000, guid: 2cc7a7323632bc74885d43745b2024f7, type: 3}
+  itemName: Short Sword_1
+  modelPrefab: {fileID: 5476652941203329699, guid: 33d327fc576d9d649afca55df31a0e5d, type: 3}
   isUnarmed: 0
   OneHanded_Light_Attack_1: OneHanded_Light_Attack_01
   OneHanded_Light_Attack_2: OneHanded_Light_Attack_02
@@ -22,4 +22,3 @@ MonoBehaviour:
   OneHanded_Heavy_Attack_2: 
   Right_Hand_Idle_01: Right_Arm_Idle_01
   Left_Hand_Idle_01: Left_Arm_Idle_01
-  Leg_Idle_01: Leg_Idle_01

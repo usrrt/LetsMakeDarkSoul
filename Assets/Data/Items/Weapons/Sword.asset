@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47929e1012ec3574ebc3b6a2567aad40, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 93207a7b58eaa0f4ab05b2afb5c50ad3, type: 3}
   itemName: Sword_1
   modelPrefab: {fileID: 2129766748542358826, guid: 6d7ce56f51bd2794ba124a923632be59, type: 3}
   isUnarmed: 0
@@ -22,4 +22,3 @@ MonoBehaviour:
   OneHanded_Heavy_Attack_2: 
   Right_Hand_Idle_01: Right_Arm_Idle_01
   Left_Hand_Idle_01: Left_Arm_Idle_01
-  Leg_Idle_01: Leg_Idle_01

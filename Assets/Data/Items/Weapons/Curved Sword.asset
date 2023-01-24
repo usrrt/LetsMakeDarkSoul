@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47929e1012ec3574ebc3b6a2567aad40, type: 3}
   m_Name: Curved Sword
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
-  itemName: Sword_1
-  modelPrefab: {fileID: 2129766748542358826, guid: 6d7ce56f51bd2794ba124a923632be59, type: 3}
+  itemIcon: {fileID: 21300000, guid: 610cb2bc967a682439355848ced42e6d, type: 3}
+  itemName: Curved Sword_1
+  modelPrefab: {fileID: 3994770163551802021, guid: 6202920a53ee7184a9c0d5adfc802040, type: 3}
   isUnarmed: 0
   OneHanded_Light_Attack_1: OneHanded_Light_Attack_01
   OneHanded_Light_Attack_2: OneHanded_Light_Attack_02
@@ -22,4 +22,3 @@ MonoBehaviour:
   OneHanded_Heavy_Attack_2: 
   Right_Hand_Idle_01: Right_Arm_Idle_01
   Left_Hand_Idle_01: Left_Arm_Idle_01
-  Leg_Idle_01: Leg_Idle_01

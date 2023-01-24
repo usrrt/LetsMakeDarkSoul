@@ -205,6 +205,7 @@ namespace HSW
                 _playerInventory.ChangeLeftWeapon();
             }
         }
+
     }
 
 }

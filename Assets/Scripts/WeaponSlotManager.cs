@@ -19,9 +19,12 @@ namespace HSW
 
         Animator _animator;
 
+        QuickSlotsUI _quickSlotsUI;
+
         private void Awake()
         {
             _animator = GetComponent<Animator>();
+            _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
 
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             // 오른손 weaponholerslot인지 왼손 weponhodlerslot인지 확인
@@ -44,6 +47,7 @@ namespace HSW
             {
                 _leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftWeaponDamageCollider();
+                _quickSlotsUI.UpdateWeaponQuickSlotUI(true, weaponItem);
                 #region Handle Left Weapon Idle Animations
                 // 안전하게 null체크 (근데 null이 들어오면 LoadLeftWeaponDamageCollider에서 오류가 발생 하지 않을까?)
                 if (weaponItem != null)
@@ -60,6 +64,7 @@ namespace HSW
             {
                 _rigthHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightWeaponDamageCollider();
+                _quickSlotsUI.UpdateWeaponQuickSlotUI(false, weaponItem);
                 #region Handle Right Weapon Idle Animations
                 if (weaponItem != null)
                 {
