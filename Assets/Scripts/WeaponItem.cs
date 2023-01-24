@@ -25,5 +25,10 @@ namespace HSW
         [Header("Idle Animations")]
         public string Right_Hand_Idle_01;
         public string Left_Hand_Idle_01;
+
+        [Header("Stamina Costs")]
+        public int baseStamina;
+        public float lightAttackMultiplier;
+        public float heavyAttackMultiplier;
     }
 }

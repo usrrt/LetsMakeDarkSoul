@@ -11,6 +11,8 @@ namespace HSW
         //             MAIL : gkenfktm@gmail.com         
         // ###############################################
 
+        public WeaponItem attackingWeapon;
+
         WeaponHolderSlot _leftHandSlot;
         WeaponHolderSlot _rigthHandSlot;
 
@@ -18,13 +20,15 @@ namespace HSW
         DamageCollider _rightHandDamageCollider;
 
         Animator _animator;
-
         QuickSlotsUI _quickSlotsUI;
+        PlayerStats _playerStats;
+
 
         private void Awake()
         {
             _animator = GetComponent<Animator>();
             _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+            _playerStats = GetComponentInParent<PlayerStats>();
 
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             // 오른손 weaponholerslot인지 왼손 weponhodlerslot인지 확인
@@ -115,6 +119,20 @@ namespace HSW
         public void CloseRightDamageCollider()
         {
             _rightHandDamageCollider.DisableDamageCollider();
+        }
+
+        #endregion
+
+        #region Handle Weapon Stamina Drains
+        public void DrainStaminaLightAttack()
+        {
+            // 반올림, 반환타입을 맞추기위해 ToInt사용
+            _playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.lightAttackMultiplier));
+        }
+
+        public void DrainStaminaHeavyAttack()
+        {
+            _playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.heavyAttackMultiplier));
         }
 
         #endregion

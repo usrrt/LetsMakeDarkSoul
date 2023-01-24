@@ -22,3 +22,6 @@ MonoBehaviour:
   OneHanded_Heavy_Attack_2: 
   Right_Hand_Idle_01: Right_Arm_Idle_01
   Left_Hand_Idle_01: Left_Arm_Idle_01
+  baseStamina: 20
+  lightAttackMultiplier: 1
+  heavyAttackMultiplier: 1.5

@@ -13,23 +13,27 @@ namespace HSW
 
         AnimatorHandler _animatorHandler;
         InputHandler _inputHandler;
+        WeaponSlotManager _weaponSlotManager;
 
         public string lastAttack; // 마지막에 사용한 공격모션
 
         private void Awake()
         {
             _animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             _inputHandler = GetComponent<InputHandler>();
         }
 
         public void HandleLightAttack(WeaponItem weapon)
         {
+            _weaponSlotManager.attackingWeapon = weapon;
             _animatorHandler.PlayTargetAnimation(weapon.OneHanded_Light_Attack_1, true);
             lastAttack = weapon.OneHanded_Light_Attack_1;
         }
 
         public void HandleHeavyAttack(WeaponItem weapon)
         {
+            _weaponSlotManager.attackingWeapon = weapon;
             _animatorHandler.PlayTargetAnimation(weapon.OneHanded_Heavy_Attack_1, true);
             lastAttack = weapon.OneHanded_Heavy_Attack_1;
         }

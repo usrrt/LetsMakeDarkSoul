@@ -15,14 +15,20 @@ namespace HSW
         public int maxHealth;
         public int currentHealth;
 
+        public int staminaLevel = 10;
+        public int maxStamina;
+        public int currentStamina;
+
         public HealthBar healthBar;
+        public StaminaBar staminaBar;
 
         private AnimatorHandler _animatorHandler;
 
         private void Awake()
         {
             _animatorHandler = GetComponentInChildren<AnimatorHandler>();
-            
+            healthBar = FindObjectOfType<HealthBar>();
+            staminaBar = FindObjectOfType<StaminaBar>();
         }
 
         private void Start()
@@ -30,12 +36,24 @@ namespace HSW
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;
             healthBar.SetMaxHealth(maxHealth);
+            healthBar.SetCurrentHealth(currentHealth);
+
+            maxStamina = SetMaxStaminaFromStamainLevel();
+            currentStamina = maxStamina;
+            staminaBar.SetMaxStamina(maxStamina);
+            staminaBar.SetCurrentStamina(currentStamina);
         }
 
         private int SetMaxHealthFromHealthLevel()
         {
             maxHealth = healthLevel * 10;
             return maxHealth;
+        }
+
+        private int SetMaxStaminaFromStamainLevel()
+        {
+            maxStamina = staminaLevel * 10;
+            return maxStamina;
         }
 
         public void TakeDamage(int damage)
@@ -52,6 +70,13 @@ namespace HSW
                 currentHealth = 0;
                 _animatorHandler.PlayTargetAnimation("Die_01", true);
             }
+        }
+
+        public void TakeStaminaDamage(int damage)
+        {
+            currentStamina -= damage;
+            // Set Bar
+            staminaBar.SetCurrentStamina(currentStamina);
         }
     }
 }

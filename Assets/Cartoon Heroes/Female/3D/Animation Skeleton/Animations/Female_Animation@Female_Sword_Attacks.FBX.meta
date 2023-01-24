@@ -400,6 +400,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.3849426
+        functionName: DrainStaminaLightAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 75e1396c504a4674ba376ad19b31e105, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.42949033
         functionName: CloseRightDamageCollider
         data: 
@@ -457,6 +464,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.37878552
+        functionName: DrainStaminaLightAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 75e1396c504a4674ba376ad19b31e105, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.46473753
         functionName: CloseRightDamageCollider
         data: 
@@ -506,7 +520,28 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.46323067
+        functionName: OpenRightDamageCollider
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 75e1396c504a4674ba376ad19b31e105, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5145006
+        functionName: DrainStaminaHeavyAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 75e1396c504a4674ba376ad19b31e105, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5499463
+        functionName: CloseRightDamageCollider
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 75e1396c504a4674ba376ad19b31e105, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

@@ -5,31 +5,29 @@ using UnityEngine.UI;
 
 namespace HSW
 {
-    public class HealthBar : MonoBehaviour
+    public class StaminaBar : MonoBehaviour
     {
         // ###############################################
         //             NAME : HongSW                      
         //             MAIL : gkenfktm@gmail.com         
         // ###############################################
 
-        public Slider healthSlider;
+        public Slider staminaSlider;
 
         private void Awake()
         {
-            healthSlider = GetComponent<Slider>();
+            staminaSlider = GetComponent<Slider>();
         }
 
-        public void SetMaxHealth(int maxHealth)
+        public void SetMaxStamina(int maxStamina)
         {
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = maxHealth;
+            staminaSlider.maxValue = maxStamina;
+            staminaSlider.value = maxStamina;
         }
 
-        public void SetCurrentHealth(int currentHealth)
+        public void SetCurrentStamina(int currentStamina)
         {
-            healthSlider.value = currentHealth;
+            staminaSlider.value = currentStamina;
         }
-
     }
-
 }

@@ -1263,14 +1263,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4863332649295994256, guid: 504554617c7e6274f9728e9e7b16e334, type: 3}
-      propertyPath: m_Color.a
-      value: 0.78431374
-      objectReference: {fileID: 0}
-    - target: {fileID: 4863332649747953725, guid: 504554617c7e6274f9728e9e7b16e334, type: 3}
-      propertyPath: m_Color.a
-      value: 0.78431374
-      objectReference: {fileID: 0}
     - target: {fileID: 4863332650126013827, guid: 504554617c7e6274f9728e9e7b16e334, type: 3}
       propertyPath: m_Name
       value: Player UI
@@ -1359,10 +1351,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4863332650756123841, guid: 504554617c7e6274f9728e9e7b16e334, type: 3}
-      propertyPath: m_Color.a
-      value: 0.78431374
-      objectReference: {fileID: 0}
     - target: {fileID: 4863332651011879345, guid: 504554617c7e6274f9728e9e7b16e334, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1370,10 +1358,6 @@ PrefabInstance:
     - target: {fileID: 4863332651011879345, guid: 504554617c7e6274f9728e9e7b16e334, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4863332651119024832, guid: 504554617c7e6274f9728e9e7b16e334, type: 3}
-      propertyPath: m_Color.a
-      value: 0.78431374
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 504554617c7e6274f9728e9e7b16e334, type: 3}
