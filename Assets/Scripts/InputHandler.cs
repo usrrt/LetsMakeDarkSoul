@@ -17,6 +17,7 @@ namespace HSW
         public float mouseX;
         public float mouseY;
 
+        public bool e_Input;
         public bool b_Input;
         public bool rb_Input;
         public bool rt_Input;
@@ -68,6 +69,7 @@ namespace HSW
             HandleRollInput(delta);
             HandleAttackInput(delta);
             HandleQuickSlotsInput();
+            HandleInteractingButtonInput();
         }
 
         private void HandleMoveInput(float delta)
@@ -206,6 +208,12 @@ namespace HSW
             }
         }
 
+        private void HandleInteractingButtonInput()
+        {
+            _inputActions.PlayerActions.E.performed += i => e_Input = true;
+
+            // TODO : 허공에 e 누르면 isInteracting이 true로 바뀌고 플레이어가 멈춤
+        }
     }
 
 }

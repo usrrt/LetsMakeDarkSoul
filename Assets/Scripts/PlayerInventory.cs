@@ -24,6 +24,9 @@ namespace HSW
         public int currentRightWeaponIndex = -1;
         public int currentLeftWeaponIndex = -1;
 
+        // 아이템 타입에따라 list생성
+        public List<WeaponItem> weaponsInventory;
+
         private void Awake()
         {
             _waponSlotManager = GetComponentInChildren<WeaponSlotManager>();

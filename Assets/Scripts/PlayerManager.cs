@@ -66,6 +66,8 @@ namespace HSW
             _locomotion.HandleMovement(delta);
             _locomotion.HandleRollingAndSprinting(delta);
             _locomotion.HandleFalling(delta, _locomotion.moveDirection);
+
+            CheckForInteractableObject();
         }
 
         private void LateUpdate()
@@ -79,10 +81,40 @@ namespace HSW
             _inputHandler.d_Pad_Down = false;
             _inputHandler.d_Pad_Right = false;
             _inputHandler.d_Pad_Left = false;
+            _inputHandler.e_Input = false;
 
             if (isInAir)
             {
                 _locomotion.inAirTimer = _locomotion.inAirTimer + Time.deltaTime;
+            }
+        }
+
+        // 끊임없이 확인해야하므로 Update에서 호출해준다
+        public void CheckForInteractableObject()
+        {
+            RaycastHit hit;
+
+            if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, _cameraHandler.ignoreLayers))
+            {
+                if (hit.collider.CompareTag("Interactable"))
+                {
+                    Debug.Log("tag");
+                    Interactable interactable = hit.collider.GetComponent<Interactable>();
+
+                    if (interactable != null)
+                    {
+                        string interactableText = interactable.interactableText;
+                        // TODO : UI text를 상호작용 text로 바꾸기
+                        // TODO : TEXT POP UP TRUE
+
+                        if (_inputHandler.e_Input)
+                        {
+                            // 버튼을 누르면 현재 hit하고있는(this)개체의 interactable과 상호작용
+                            Debug.Log("상호작용 시작");
+                            hit.collider.GetComponent<Interactable>().Interact(this);
+                        }
+                    }
+                }
             }
         }
     }

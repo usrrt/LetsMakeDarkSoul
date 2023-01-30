@@ -1530,7 +1530,11 @@ MonoBehaviour:
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
+  staminaLevel: 10
+  maxStamina: 0
+  currentStamina: 0
   healthBar: {fileID: 0}
+  staminaBar: {fileID: 0}
 --- !u!1 &7232677749767181653
 GameObject:
   m_ObjectHideFlags: 0
@@ -3315,6 +3319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e1396c504a4674ba376ad19b31e105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackingWeapon: {fileID: 0}
 --- !u!1 &7295273133294609111
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,13 +16,12 @@ namespace HSW
         public Transform targetTransform;
         public Transform cameraTransform;
         public Transform cameraPivotTransform;
+        public LayerMask ignoreLayers;
 
         private Transform _myTransform;
         private Vector3 _cameraTransformPosition;
-        private LayerMask _ignoreLayers;
         private Vector3 _cameraFollowVelocity = Vector3.zero;
         
-
         public float lookSpeed = 0.1f;
         public float followSpeed = 0.1f;
         public float pivotSpeed = 0.03f;
@@ -46,7 +45,7 @@ namespace HSW
             _defaultPosition = cameraTransform.localPosition.z;
             
             // TODO : 비트연산자인거 맞지? 어떻게 해석하는지 모르겠다 일단은
-            _ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
+            ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
         }
 
         /// <summary>
@@ -89,7 +88,7 @@ namespace HSW
             Vector3 direction = cameraTransform.position - cameraPivotTransform.position;
             direction.Normalize();
 
-            if (Physics.SphereCast(cameraPivotTransform.position, cameraSphereRadius, direction, out hit, Mathf.Abs(_targetPosition), _ignoreLayers))
+            if (Physics.SphereCast(cameraPivotTransform.position, cameraSphereRadius, direction, out hit, Mathf.Abs(_targetPosition), ignoreLayers))
             {
                 float dist = Vector3.Distance(cameraPivotTransform.position, hit.point);
                 _targetPosition = -(dist - cameraCollisionOffset);
