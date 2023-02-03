@@ -248,6 +248,29 @@ namespace HSW
 
         }
 
+        public void HandleJumping()
+        {
+            // 다른 행동을 취하는 도중 jump하는것을 방지
+            if (_playerManager.isInteracting)
+            {
+                return;
+            }
+
+            if (_inputHandler.jump_Input)
+            {
+                if (_inputHandler.moveAmount > 0)
+                {
+                    moveDirection = _cameraObject.forward * _inputHandler.vertical;
+                    moveDirection += _cameraObject.right * _inputHandler.horizontal;
+                    animatorHandler.PlayTargetAnimation("Jump", true);
+                    Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
+                    myTransform.rotation = jumpRotation;
+                    moveDirection.y = 0;
+                }
+            }
+        }
+
+
         #endregion
 
     }

@@ -67,11 +67,13 @@ namespace HSW
 
             isInteracting = _anim.GetBool("isInteracting");
             canDoCombo = _anim.GetBool("canDoCombo");
+            _anim.SetBool("isInAir", isInAir);
 
             _inputHandler.TickInput(delta);
             _locomotion.HandleMovement(delta);
             _locomotion.HandleRollingAndSprinting(delta);
             _locomotion.HandleFalling(delta, _locomotion.moveDirection);
+            // _locomotion.HandleJumping(); 보류 : 사용중인 애니메이션 점프모션은 루트모션이 없음 즉, 점프해도 캐릭터가 움직이지 않음. rigidBody를 이용해봤으나 어색한 움직임으로 인해 추후 구현할 예정
 
             CheckForInteractableObject();
         }
@@ -88,11 +90,13 @@ namespace HSW
             _inputHandler.d_Pad_Right = false;
             _inputHandler.d_Pad_Left = false;
             _inputHandler.e_Input = false;
+            _inputHandler.jump_Input = false;
 
             if (isInAir)
             {
                 _locomotion.inAirTimer = _locomotion.inAirTimer + Time.deltaTime;
             }
+
         }
 
         // 끊임없이 확인해야하므로 Update에서 호출해준다

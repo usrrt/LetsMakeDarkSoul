@@ -26,6 +26,10 @@ namespace HSW
 
         public void HandleLightAttack(WeaponItem weapon)
         {
+            if (weapon.isUnarmed)
+            {
+                return;
+            }
             _weaponSlotManager.attackingWeapon = weapon;
             _animatorHandler.PlayTargetAnimation(weapon.OneHanded_Light_Attack_1, true);
             lastAttack = weapon.OneHanded_Light_Attack_1;
@@ -33,6 +37,10 @@ namespace HSW
 
         public void HandleHeavyAttack(WeaponItem weapon)
         {
+            if (weapon.isUnarmed)
+            {
+                return;
+            }
             _weaponSlotManager.attackingWeapon = weapon;
             _animatorHandler.PlayTargetAnimation(weapon.OneHanded_Heavy_Attack_1, true);
             lastAttack = weapon.OneHanded_Heavy_Attack_1;
