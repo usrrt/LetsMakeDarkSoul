@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace HSW
 {
@@ -36,6 +38,9 @@ namespace HSW
             locomotion.rigid.velocity = Vector3.zero; // 아이템 주울 때 플레이어 멈추기
             animatorHandler.PlayTargetAnimation("Pick Up", true); // 아이템 주울 때 애니메이션 실행
             inventory.weaponsInventory.Add(weapon);
+            playerManager.itemPopUpGameObject.GetComponentInChildren<TextMeshProUGUI>().text = weapon.itemName;
+            playerManager.itemPopUpGameObject.GetComponentInChildren<RawImage>().texture = weapon.itemIcon.texture;
+            playerManager.itemPopUpGameObject.SetActive(true);
             Destroy(gameObject);
         }
     }

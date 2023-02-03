@@ -21,6 +21,10 @@ namespace HSW
         Animator _anim;
         CameraHandler _cameraHandler;
         PlayerLocomotion _locomotion;
+        InteractableUI _interactableUI;
+
+        public GameObject interactableUIGameObject;
+        public GameObject itemPopUpGameObject;
 
         // GetBool로 상태를 가져온뒤 조건문으로 사용함
         public bool isInteracting;
@@ -41,6 +45,8 @@ namespace HSW
             _locomotion = GetComponent<PlayerLocomotion>();
             _inputHandler = GetComponent<InputHandler>();
             _anim = GetComponentInChildren<Animator>();
+            _interactableUI = FindObjectOfType<InteractableUI>();
+
         }
 
         private void FixedUpdate()
@@ -98,22 +104,34 @@ namespace HSW
             {
                 if (hit.collider.CompareTag("Interactable"))
                 {
-                    Debug.Log("tag");
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
 
                     if (interactable != null)
                     {
                         string interactableText = interactable.interactableText;
                         // TODO : UI text를 상호작용 text로 바꾸기
+                        _interactableUI.interactableText.text = interactableText;
                         // TODO : TEXT POP UP TRUE
+                        interactableUIGameObject.SetActive(true);
 
                         if (_inputHandler.e_Input)
                         {
                             // 버튼을 누르면 현재 hit하고있는(this)개체의 interactable과 상호작용
-                            Debug.Log("상호작용 시작");
                             hit.collider.GetComponent<Interactable>().Interact(this);
                         }
                     }
+                }
+            }
+            else
+            {
+                if (interactableUIGameObject != null)
+                {
+                    interactableUIGameObject.SetActive(false);
+                }
+
+                if (itemPopUpGameObject != null && _inputHandler.e_Input)
+                {
+                    itemPopUpGameObject.SetActive(false);
                 }
             }
         }

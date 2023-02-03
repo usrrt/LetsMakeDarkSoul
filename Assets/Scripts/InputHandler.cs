@@ -211,8 +211,6 @@ namespace HSW
         private void HandleInteractingButtonInput()
         {
             _inputActions.PlayerActions.E.performed += i => e_Input = true;
-
-            // TODO : 허공에 e 누르면 isInteracting이 true로 바뀌고 플레이어가 멈춤
         }
     }
 
